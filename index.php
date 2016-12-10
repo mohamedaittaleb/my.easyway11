@@ -28,7 +28,11 @@ if(!empty($messageText))
 		'message' => [ 'attachment' => $menu_message ]
 	];
 
-	if ($messageText == 'ASK_QUESTION') {
+	
+
+	
+}
+elseif ($messageText == 'ASK_QUESTION') {
 		$menu_messa = [
 		'type'    => 'template',
 		'payload' => [
@@ -43,10 +47,9 @@ if(!empty($messageText))
 		];
 	}
 
-	$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
+$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
 	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 	curl_exec($ch);
 	curl_close($ch);
-}
