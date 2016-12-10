@@ -22,7 +22,7 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 	   $menu_message = [
             'type'    => 'template',
-            'payload' => ['template_type' => 'button', 'image' => 'http://i.imgur.com/CBIvTQh.png', 'buttons' => $buttons]
+            'payload' => ['template_type' => 'button', 'image_url' => 'http://i.imgur.com/CBIvTQh.png', 'buttons' => $buttons]
            ];
 	}
         
