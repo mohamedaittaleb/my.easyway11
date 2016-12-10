@@ -17,7 +17,7 @@ if(!empty($messageText))
 	$menu_message = [];
 	$buttons = [];
 	$buttons[] = ['type' => 'postback', 'title' => 'Ask us a Question', 'payload' => 'ASK_QUESTION'];
-	$buttons[] = ['type' => 'postback', 'title' => 'Use Dictionary', 'payload' => 'TODAY_DEALS'];
+	$buttons[] = ['type' => 'postback', 'title' => 'Use Dictionary', 'payload' => 'USE_DIC'];
 	$menu_message = [
 	'type'    => 'template',
 	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
@@ -31,7 +31,16 @@ if(!empty($messageText))
 	
 		
 }elseif ($special_command == 'ASK_QUESTION') {
-		$ask_message = 'ok shut up';
+		$ask_message = 'Please write your question :) ';
+		
+
+		$response = [
+			'recipient' => [ 'id' => $senderId ],
+			'message' => [ 'text' => $ask_message ]
+		];
+	}
+elseif ($special_command == 'USE_DIC') {
+		$ask_message = 'Working on it :D ';
 		
 
 		$response = [
