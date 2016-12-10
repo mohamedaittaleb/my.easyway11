@@ -17,35 +17,36 @@ if(!empty($messageText))
 	$buttons = [];
 	$buttons[] = ['type' => 'postback', 'title' => 'Ask us a Question', 'payload' => 'ASK_QUESTION'];
 	$buttons[] = ['type' => 'postback', 'title' => 'Use Dictionary', 'payload' => 'TODAY_DEALS'];
-		$menu_message = [
-              'type'    => 'template',
-             'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
-            
-             ];
+	$menu_message = [
+	'type'    => 'template',
+	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
+
+	];
+
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'attachment' => $menu_message ]
-		];
- 	if ($messageText == 'ASK_QUESTION') {
-		$menu_message = [
-            'type'    => 'template',
-            'payload' => [
-                'template_type' => 'button',
-                'text'          => 'Do you want to see your order?',
-                'buttons'       => $buttons
-            ]
-        ];
-        $response = [
-		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'attachment' => $menu_message ]
-		];
-	}
-		
+	];
 
-		$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-		curl_exec($ch);
-		curl_close($ch);
+	if ($messageText == 'ASK_QUESTION') {
+		$menu_messa = [
+		'type'    => 'template',
+		'payload' => [
+		'template_type' => 'button',
+		'text'          => 'Do you want to see your order?',
+		'buttons'       => $buttons
+		]
+		];
+		$response = [
+			'recipient' => [ 'id' => $senderId ],
+			'message' => [ 'attachment' => $menu_messa ]
+		];
 	}
+
+	$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+	curl_exec($ch);
+	curl_close($ch);
+}
