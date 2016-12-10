@@ -13,19 +13,32 @@ $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
 
-//if (strpos($messageText, 'translate') !== false) {
-if (!empty($messageText)) {
-	$apiKey = 'AIzaSyDwFOPkNAENeet5eTqaT6g18Eua5iQbn0I';
-    	$text = 'man';
-    	$url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($text) . '&source=en&target=ar';
-
-    	$handle = curl_init($url);
-    	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    	$response = curl_exec($handle);                 
-    	$responseDecoded = json_decode($response, true);
-    	curl_close($handle);
+if (strpos($messageText, 'translate') !== false) {
 	
-	$tr = $responseDecoded['data']['translations'][0]['translatedText'];	
+$api_key = 'AIzaSyD3Gc000P97xj0jr3QC8Dl7c06aa-BYmck';
+$text = 'How are you';
+$source="en";
+$target="fr";
+ 
+$url = 'https://www.googleapis.com/language/translate/v2?key=' . $api_key . '&q=' . rawurlencode($text);
+$url .= '&target='.$target;
+$url .= '&source='.$source;
+ 
+$response = file_get_contents($url);
+$obj =json_decode($response,true); //true converts stdClass to associative array.
+if($obj != null)
+{
+    if(isset($obj['error']))
+    {
+        $tr = "Error is : ".$obj['error']['message'];
+    }
+    else
+    {
+        $tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
+    }
+}
+else
+    $tr ="UNKNOW ERROR";	
 		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
