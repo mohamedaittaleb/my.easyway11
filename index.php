@@ -57,6 +57,13 @@ elseif ($special_command == 'USE_DIC') {
     	$response = curl_exec($handle);                 
     	$responseDecoded = json_decode($response, true);
     	curl_close($handle);
+		
+		
+			
+			$response = [
+			'recipient' => [ 'id' => $senderId ],
+			'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
+		];
 }
 }
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
