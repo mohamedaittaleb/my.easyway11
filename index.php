@@ -32,24 +32,22 @@ if(!empty($messageText))
 
 	
 }
-if ($messageText == 'ASK_QUESTION') {
-	$menu_message = [];
-	$buttons = [];
-	$buttons[] = ['type' => 'postback', 'title' => 'As', 'payload' => 'ASK_QUESTION'];
-	$buttons[] = ['type' => 'postback', 'title' => 'Useary', 'payload' => 'TODAY_DEALS'];
-	$menu_message = [
-	'type'    => 'template',
-	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
-
-	];
+if ($messageText == 'Ask us a Question') {
+	$ask_message = 'Please type your Question :)';
 
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'attachment' => $menu_message ]
+		'message' => [ 'text' => $ask_message ]
 	];
+}
+if ($messageText == 'Use Dictionary') {
+	$dic_message = 'Please type the word that you are looking for :)';
 
-	}
-
+	$response = [
+		'recipient' => [ 'id' => $senderId ],
+		'message' => [ 'text' => $dic_message ]
+	];
+}
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
