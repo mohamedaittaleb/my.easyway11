@@ -34,7 +34,8 @@ if($obj != null)
     }
     else
     {
-        $tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
+        //$tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
+	    $tr='http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';	
     }
 }
 else
