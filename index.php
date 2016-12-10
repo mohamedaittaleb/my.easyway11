@@ -12,7 +12,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
-if($messageText == 'help')
+if(!$empty($messageText))
 {
 	$menu_message = [];
 	$buttons = [];
@@ -31,19 +31,12 @@ if($messageText == 'help')
 	
 		
 }elseif ($special_command == 'ASK_QUESTION') {
-		$menu_message = [];
-		$buttons = [];
-		$buttons[] = ['type' => 'postback', 'title' => 'shit', 'payload' => 'ASK_QUESTION'];
-		$buttons[] = ['type' => 'postback', 'title' => 'bullshit', 'payload' => 'TODAY_DEALS'];
-		$menu_message = [
-		'type'    => 'template',
-		'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
-
-		];
+		$ask_message = 'ok shut up';
+		
 
 		$response = [
 			'recipient' => [ 'id' => $senderId ],
-			'message' => [ 'attachment' => $menu_message ]
+			'message' => [ 'text' => $ask_message ]
 		];
 	}
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
