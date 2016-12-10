@@ -11,6 +11,7 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
+$special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
 if($messageText == 'help')
 {
 	$menu_message = [];
@@ -29,7 +30,7 @@ if($messageText == 'help')
 	];
 	
 		
-}elseif ($messageText == 'ASK_QUESTION') {
+}elseif ($special_command == 'ASK_QUESTION') {
 		$menu_message = [];
 		$buttons = [];
 		$buttons[] = ['type' => 'postback', 'title' => 'shit', 'payload' => 'ASK_QUESTION'];
