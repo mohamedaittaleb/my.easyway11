@@ -28,7 +28,25 @@ if(!empty($messageText))
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'attachment' => $menu_message ]
 	];
+
+	if (strpos($messageText, 'translate') !== false) {
+	$apiKey = 'AIzaSyDwFOPkNAENeet5eTqaT6g18Eua5iQbn0I';
+    	$text = $messageText;
+    	$url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($text) . '&source=en&target=ar';
+
+    	$handle = curl_init($url);
+    	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    	$response = curl_exec($handle);                 
+    	$responseDecoded = json_decode($response, true);
+    	curl_close($handle);
+		
+		
+	$response = [
+		'recipient' => [ 'id' => $senderId ],
+		'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
+	];
 	
+	}
 		
 }elseif ($special_command == 'ASK_QUESTION') {
 		$ask_message = 'Please write your question :) ';
@@ -49,22 +67,6 @@ elseif ($special_command == 'USE_DIC') {
 		];
 	
 	
-}elseif (strpos($messageText, 'translate') !== false) {
-	$apiKey = 'AIzaSyDwFOPkNAENeet5eTqaT6g18Eua5iQbn0I';
-    	$text = $messageText;
-    	$url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($text) . '&source=en&target=ar';
-
-    	$handle = curl_init($url);
-    	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    	$response = curl_exec($handle);                 
-    	$responseDecoded = json_decode($response, true);
-    	curl_close($handle);
-		
-		
-	$response = [
-		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
-	];
 }
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
