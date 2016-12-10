@@ -21,25 +21,10 @@ if(!empty($messageText))
 	$buttons[] = ['type' => 'postback', 'title' => 'Todays deals', 'payload' => 'TODAY_DEALS'];
 	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 		$menu_message = [
-		'type'    => 'template',
-		"payload":{
-        "template_type":"generic",
-        "elements":[
-          {
-            "title":"Classic White T-Shirt",
-            "image_url":"http://petersapparel.parseapp.com/img/whiteshirt.png",
-            "subtitle":"Soft white cotton t-shirt is back in style",
-            "buttons":[
-              {
-                "type":"postback",
-                "title":"Bookmark Item",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD"
-              }
-            ]
-          }
-        ]
-      }
-      ];
+              'type'    => 'template',
+             'payload' => ['template_type' => 'button', 'text' => 'Select one of the option', 'buttons' => $buttons]
+            
+             ];
   }
 
 		$response = [
