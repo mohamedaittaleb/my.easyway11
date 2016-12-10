@@ -11,39 +11,20 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
-
 if(!empty($messageText))
 {
 	$answer = "Welcome to our facebook page, here you can ask us whatever you want :)";
 	$menu_message = [];
 	$buttons = [];
-	$buttons[] = ['type' => 'postback', 'title' => 'Menu', 'payload' => 'CURRENT_MENU'];
-	$buttons[] = ['type' => 'postback', 'title' => 'Todays deals', 'payload' => 'TODAY_DEALS'];
+	$buttons[] = ['type' => 'postback', 'title' => 'Ask us a Question', 'payload' => 'CURRENT_MENU'];
+	$buttons[] = ['type' => 'postback', 'title' => 'Use Dictionary', 'payload' => 'TODAY_DEALS'];
 	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 		$menu_message = [
               'type'    => 'template',
-             'payload' => {'template_type' => 'button', 'elements'=>[
-          {
-            'title'=>'Classic White T-Shirt',
-            'item_url'=>'https=>//petersfancyapparel.com/classic_white_tshirt',
-            'image_url'=>'https=>//petersfancyapparel.com/classic_white_tshirt.png',
-            'subtitle'=>'Soft white cotton t-shirt is back in style',
-            'buttons'=>[
-              {
-                'type'=>'web_url',
-                'url'=>'https=>//petersfancyapparel.com/classic_white_tshirt',
-                'title'=>'View Item',
-                'webview_height_ratio'=>'tall'
-              }
-            ]
-          }
-        ]}
-			
-			
+             'payload' => ['template_type' => 'button', 'text' => 'Select one of the option', 'buttons' => $buttons]
             
              ];
   }
-
 		$response = [
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'attachment' => $menu_message ]
@@ -55,4 +36,3 @@ if(!empty($messageText))
 		curl_exec($ch);
 		curl_close($ch);
 	}
-	
