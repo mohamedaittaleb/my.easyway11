@@ -40,9 +40,7 @@ if(!empty($messageText))
         ]
       }
       ];
-
-
-
+  }
 
 		$response = [
 		'recipient' => [ 'id' => $senderId ],
