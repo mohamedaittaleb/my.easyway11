@@ -27,34 +27,23 @@ if(!empty($messageText))
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'attachment' => $menu_message ]
 	];
-
 	
-
-	
-}
-if ($messageText == 'Ask us a Question') {
+	if ($messageText == 'ASK_QUESTION') {
 		$menu_message = [];
-	$buttons = [];
-	$buttons[] = ['type' => 'postback', 'title' => 'Ask uQuestion', 'payload' => 'ASK_QUESTION'];
-	$buttons[] = ['type' => 'postback', 'title' => 'Ustionary', 'payload' => 'TODAY_DEALS'];
-	$menu_message = [
-	'type'    => 'template',
-	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
+		$buttons = [];
+		$buttons[] = ['type' => 'postback', 'title' => 'shit', 'payload' => 'ASK_QUESTION'];
+		$buttons[] = ['type' => 'postback', 'title' => 'bullshit', 'payload' => 'TODAY_DEALS'];
+		$menu_message = [
+		'type'    => 'template',
+		'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
 
-	];
+		];
 
-	$response = [
-		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'attachment' => $menu_message ]
-	];
-}
-if ($messageText == 'Use Dictionary') {
-	$dic_message = 'Please type the word that you are looking for :)';
-
-	$response = [
-		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'text' => $dic_message ]
-	];
+		$response = [
+			'recipient' => [ 'id' => $senderId ],
+			'message' => [ 'attachment' => $menu_message ]
+		];
+	}	
 }
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
