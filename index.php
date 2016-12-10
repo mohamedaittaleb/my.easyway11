@@ -13,9 +13,10 @@ $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
 
-if (strpos($messageText, 'translate') !== false) {
+//if (strpos($messageText, 'translate') !== false) {
+if (!empty($messageText)) {
 	$apiKey = 'AIzaSyDwFOPkNAENeet5eTqaT6g18Eua5iQbn0I';
-    	$text = $messageText;
+    	$text = 'man';
     	$url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($text) . '&source=en&target=ar';
 
     	$handle = curl_init($url);
@@ -23,11 +24,12 @@ if (strpos($messageText, 'translate') !== false) {
     	$response = curl_exec($handle);                 
     	$responseDecoded = json_decode($response, true);
     	curl_close($handle);
-		
+	
+	$tr = $responseDecoded['data']['translations'][0]['translatedText'];	
 		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
+		'message' => [ 'text' =>  $tr]
 	];
 	
 }elseif ($special_command == 'ASK_QUESTION') {
@@ -49,7 +51,7 @@ elseif ($special_command == 'USE_DIC') {
 		];
 	
 	
-}else{
+}elseif(!empty($messageText)){
 	$menu_message = [];
 	$buttons = [];
 	$buttons[] = ['type' => 'postback', 'title' => 'Ask us a Question', 'payload' => 'ASK_QUESTION'];
