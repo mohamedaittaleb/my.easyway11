@@ -14,8 +14,8 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 
   if(!empty($messageText))
 {
-	$answer = "I don't understand. Ask me 'hi'.";
-	if($messageText == "hi") {
+	$answer = "Welcome to our facebook page, here you can ask us whatever you want :)";
+	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 	    $answer = "Hello";
 	}
 	$response = [
