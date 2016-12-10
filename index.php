@@ -32,7 +32,7 @@ if(!empty($messageText))
 
 	
 }
-elseif ($messageText == 'ASK_QUESTION') {
+if ($messageText == 'ASK_QUESTION') {
 	$menu_message = [];
 	$buttons = [];
 	$buttons[] = ['type' => 'postback', 'title' => 'As', 'payload' => 'ASK_QUESTION'];
