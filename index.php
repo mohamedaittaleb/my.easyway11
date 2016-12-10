@@ -38,8 +38,7 @@ if($obj != null)
     }
 }
 else
-$tr = 'https://www.googleapis.com/language/translate/v2?key=' . $api_key . '&q=' . rawurlencode($text);
-    //$tr =$url;	
+$tr = 'Chouf m3a ayoub rah wa3er f loungli ach bghitini ana hahahahahah had lkhra meredni';	
 		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
