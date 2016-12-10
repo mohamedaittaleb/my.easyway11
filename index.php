@@ -38,7 +38,8 @@ if($obj != null)
     }
 }
 else
-    $tr ="UNKNOW ERROR";	
+$tr = 'https://www.googleapis.com/language/translate/v2?key=' . $api_key . '&q=' . rawurlencode($text);
+    //$tr =$url;	
 		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
