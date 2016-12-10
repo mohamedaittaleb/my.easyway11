@@ -33,11 +33,19 @@ if(!empty($messageText))
 	
 }
 if ($messageText == 'Ask us a Question') {
-	$ask_message = 'Please type your Question :)';
+		$menu_message = [];
+	$buttons = [];
+	$buttons[] = ['type' => 'postback', 'title' => 'Ask uQuestion', 'payload' => 'ASK_QUESTION'];
+	$buttons[] = ['type' => 'postback', 'title' => 'Ustionary', 'payload' => 'TODAY_DEALS'];
+	$menu_message = [
+	'type'    => 'template',
+	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
+
+	];
 
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'text' => $ask_message ]
+		'message' => [ 'attachment' => $menu_message ]
 	];
 }
 if ($messageText == 'Use Dictionary') {
