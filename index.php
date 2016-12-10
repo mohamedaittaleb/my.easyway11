@@ -12,7 +12,7 @@ $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
-if(!$empty($messageText))
+if(!empty($messageText))
 {
 	$menu_message = [];
 	$buttons = [];
