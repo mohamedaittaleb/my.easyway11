@@ -16,7 +16,7 @@ $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
 if (strpos($messageText, 'translate') !== false) {
 	
 $api_key = '90a6a10a5ff4d106deb662b627130ca6';
-$text = 'How';
+$text = 'man';
 $source="en";
 $target="fr";
  
