@@ -22,7 +22,24 @@ if(!empty($messageText))
 	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 		$menu_message = [
               'type'    => 'template',
-             'payload' => ['template_type' => 'button', 'text' => 'Select one of the option', 'buttons' => $buttons]
+             'payload' => {'template_type' => 'button', 'elements'=>[
+          {
+            'title'=>'Classic White T-Shirt',
+            'item_url'=>'https=>//petersfancyapparel.com/classic_white_tshirt',
+            'image_url'=>'https=>//petersfancyapparel.com/classic_white_tshirt.png',
+            'subtitle'=>'Soft white cotton t-shirt is back in style',
+            'buttons'=>[
+              {
+                'type'=>'web_url',
+                'url'=>'https=>//petersfancyapparel.com/classic_white_tshirt',
+                'title'=>'View Item',
+                'webview_height_ratio'=>'tall'
+              }
+            ]
+          }
+        ]}
+			
+			
             
              ];
   }
