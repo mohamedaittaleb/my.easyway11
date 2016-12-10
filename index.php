@@ -11,6 +11,9 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
+$buttons = [];
+	$buttons[] = ['type' => 'postback', 'title' => 'Ask us dddda Question', 'payload' => 'ASK_QUESTION'];
+	$buttons[] = ['type' => 'postback', 'title' => 'ddddddUse Dictionary', 'payload' => 'TODAY_DEALS'];
 if(!empty($messageText))
 {
 	$menu_message = [];
@@ -33,6 +36,7 @@ if(!empty($messageText))
 	
 }
 elseif ($messageText == 'ASK_QUESTION') {
+	$menu_messa = [];
 		$menu_messa = [
 		'type'    => 'template',
 		'payload' => [
