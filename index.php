@@ -15,14 +15,14 @@ $special_command = $input['entry'][0]['messaging'][0]['postback']['payload'];
 
 if (strpos($messageText, 'translate') !== false) {
 	
-$api_key = 'AIzaSyD3Gc000P97xj0jr3QC8Dl7c06aa-BYmck';
-$text = 'How are you';
+$api_key = '90a6a10a5ff4d106deb662b627130ca6';
+$text = 'How';
 $source="en";
 $target="fr";
  
-$url = 'https://www.googleapis.com/language/translate/v2?key=' . $api_key . '&q=' . rawurlencode($text);
-$url .= '&target='.$target;
-$url .= '&source='.$source;
+$url = 'http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';
+//$url .= '&target='.$target;
+//$url .= '&source='.$source;
  
 $response = file_get_contents($url);
 $obj =json_decode($response,true); //true converts stdClass to associative array.
@@ -38,8 +38,8 @@ if($obj != null)
     }
 }
 else
-$tr = 'Chouf m3a ayoub rah wa3er f loungli ach bghitini ana hahahahahah had lkhra meredni';	
-		
+//$tr = 'Chouf m3a ayoub rah wa3er f loungli ach bghitini ana hahahahahah had lkhra meredni';	
+$tr='http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'text' =>  $tr]
