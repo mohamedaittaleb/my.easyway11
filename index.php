@@ -11,9 +11,6 @@ if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
 $input = json_decode(file_get_contents('php://input'), true);
 $senderId = $input['entry'][0]['messaging'][0]['sender']['id'];
 $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
-$buttons = [];
-	$buttons[] = ['type' => 'postback', 'title' => 'Ask us dddda Question', 'payload' => 'ASK_QUESTION'];
-	$buttons[] = ['type' => 'postback', 'title' => 'ddddddUse Dictionary', 'payload' => 'TODAY_DEALS'];
 if(!empty($messageText))
 {
 	$menu_message = [];
@@ -36,19 +33,21 @@ if(!empty($messageText))
 	
 }
 elseif ($messageText == 'ASK_QUESTION') {
-	$menu_messa = [];
-		$menu_messa = [
-		'type'    => 'template',
-		'payload' => [
-		'template_type' => 'button',
-		'text'          => 'Do you want to see your order?',
-		'buttons'       => $buttons
-		]
-		];
-		$response = [
-			'recipient' => [ 'id' => $senderId ],
-			'message' => [ 'attachment' => $menu_messa ]
-		];
+	$menu_message = [];
+	$buttons = [];
+	$buttons[] = ['type' => 'postback', 'title' => 'As', 'payload' => 'ASK_QUESTION'];
+	$buttons[] = ['type' => 'postback', 'title' => 'Useary', 'payload' => 'TODAY_DEALS'];
+	$menu_message = [
+	'type'    => 'template',
+	'payload' => ['template_type' => 'button', 'text' => 'Welcome to our facebook page My Easy Way To Learn English', 'buttons' => $buttons]
+
+	];
+
+	$response = [
+		'recipient' => [ 'id' => $senderId ],
+		'message' => [ 'attachment' => $menu_message ]
+	];
+
 	}
 
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
