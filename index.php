@@ -1,7 +1,7 @@
 <?php
 // parameters
 $hubVerifyToken = 'TOKEN123456abcd';
-$accessToken = "xxx";
+$accessToken = "2936abbac06c2f124b69c72b3881d5e9";
 // check token at setup
 if ($_REQUEST['hub_verify_token'] === $hubVerifyToken) {
   echo $_REQUEST['hub_challenge'];
