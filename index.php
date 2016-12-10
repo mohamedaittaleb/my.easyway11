@@ -18,10 +18,20 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
 	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
 	    $answer = "Hello";
 	}
-	$response = [
+	  $response['recipient'] = ['id' => $sender];
+        $menu_message = [];
+        $buttons = [];
+        $buttons[] = ['type' => 'postback', 'title' => 'Menu', 'payload' => 'CURRENT_MENU'];
+        $buttons[] = ['type' => 'postback', 'title' => 'Todays deals', 'payload' => 'TODAY_DEALS'];
+        $menu_message = [
+            'type'    => 'template',
+            'payload' => ['template_type' => 'button', 'text' => 'Select one of the option', 'buttons' => $buttons]
+        ];
+        $response['message'] = ['attachment' => $menu_message];
+	/*$response = [
 	    'recipient' => [ 'id' => $senderId ],
 	    'message' => [ 'text' => $answer ]
-	];
+	];*/
 	$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
