@@ -25,7 +25,7 @@ if(!empty($messageText))
  
 		$response = [
 		'recipient' => [ 'id' => $senderId ],
-		'message' => [ 'attachment' => $menu_message ]
+		'message' => [ 'attachment' => $menu_message+$messageText ]
 		];
 		$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 		curl_setopt($ch, CURLOPT_POST, 1);
