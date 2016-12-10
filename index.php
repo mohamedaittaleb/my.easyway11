@@ -26,6 +26,9 @@ $url = 'http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';
  
 $response = file_get_contents($url);
 $obj =json_decode($response,true); //true converts stdClass to associative array.
+	foreach ($obj as $key => $value) {
+    $tr= $tr +  "Key: $key; Value: $value\n";
+}
 if($obj != null)
 {
     if(isset($obj['error']))
@@ -34,8 +37,12 @@ if($obj != null)
     }
     else
     {
-        //$tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
-	    $tr=implode(",",$obj);	
+       // $tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
+	
+	    $response = [
+		'recipient' => [ 'id' => $senderId ],
+		'message' => [ 'text' =>  $tr]
+		];
     }
 }
 else
