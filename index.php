@@ -15,23 +15,24 @@ $messageText = $input['entry'][0]['messaging'][0]['message']['text'];
   if(!empty($messageText))
 {
 	$answer = "Welcome to our facebook page, here you can ask us whatever you want :)";
-	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
-	    $answer = "Hello";
-	}
-	  $response['recipient'] = ['id' => $sender];
-        $menu_message = [];
-        $buttons = [];
+	$menu_message = [];
+	$buttons = [];
         $buttons[] = ['type' => 'postback', 'title' => 'Menu', 'payload' => 'CURRENT_MENU'];
         $buttons[] = ['type' => 'postback', 'title' => 'Todays deals', 'payload' => 'TODAY_DEALS'];
-        $menu_message = [
+	if($messageText == "hi" || $messageText == "Hi" || $messageText == "hello" ) {
+	   $menu_message = [
             'type'    => 'template',
             'payload' => ['template_type' => 'button', 'text' => 'Select one of the option', 'buttons' => $buttons]
-        ];
-        $response['message'] = ['attachment' => $menu_message];
-	/*$response = [
+           ];
+	}
+        
+        
+        
+      
+	$response = [
 	    'recipient' => [ 'id' => $senderId ],
-	    'message' => [ 'text' => $answer ]
-	];*/
+	    'message' => [ 'attachment' => $menu_message ]
+	];
 	$ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
