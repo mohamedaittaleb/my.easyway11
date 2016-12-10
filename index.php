@@ -37,8 +37,8 @@ if($obj != null)
     }
     else
     {
-       // $tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
-	
+        //$tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
+	$tr=$obj['noun']['syn'][0];
 	    $response = [
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'text' =>  $tr]
@@ -46,8 +46,8 @@ if($obj != null)
     }
 }
 else
-//$tr = 'Chouf m3a ayoub rah wa3er f loungli ach bghitini ana hahahahahah had lkhra meredni';	
-$tr='http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';		
+$tr = 'Chouf m3a ayoub rah wa3er f loungli ach bghitini ana hahahahahah had lkhra meredni';	
+//$tr='http://words.bighugelabs.com/api/2/' . $api_key . '/' . $text .'/json';		
 	$response = [
 		'recipient' => [ 'id' => $senderId ],
 		'message' => [ 'text' =>  $tr]
