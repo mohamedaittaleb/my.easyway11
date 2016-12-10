@@ -35,7 +35,7 @@ if($obj != null)
     else
     {
         //$tr = "Translsated Text: ".$obj['data']['translations'][0]['translatedText']."n";
-	    $tr=$obj;	
+	    $tr=implode(",",$obj);	
     }
 }
 else
