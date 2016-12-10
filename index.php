@@ -40,14 +40,16 @@ if(!empty($messageText))
 		];
 	}
 elseif ($special_command == 'USE_DIC') {
-		$ask_message = 'Working on it :D ';
+		$ask_message = 'Type: translate <word>';
 		
 
 		$response = [
 			'recipient' => [ 'id' => $senderId ],
 			'message' => [ 'text' => $ask_message ]
 		];
-	if(!empty($messageText)){
+	
+	
+}elseif (strpos($messageText, 'translate') !== false) {
 	$apiKey = 'AIzaSyDwFOPkNAENeet5eTqaT6g18Eua5iQbn0I';
     	$text = $messageText;
     	$url = 'https://www.googleapis.com/language/translate/v2?key=' . $apiKey . '&q=' . rawurlencode($text) . '&source=en&target=ar';
@@ -59,12 +61,10 @@ elseif ($special_command == 'USE_DIC') {
     	curl_close($handle);
 		
 		
-			
-			$response = [
-			'recipient' => [ 'id' => $senderId ],
-			'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
-		];
-}
+	$response = [
+		'recipient' => [ 'id' => $senderId ],
+		'message' => [ 'text' => $responseDecoded['data']['translations'][0]['translatedText'] ]
+	];
 }
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
