@@ -28,7 +28,8 @@ if(!empty($messageText))
 		'message' => [ 'attachment' => $menu_message ]
 	];
 	
-	if ($messageText == 'ASK_QUESTION') {
+		
+}elseif ($messageText == 'ASK_QUESTION') {
 		$menu_message = [];
 		$buttons = [];
 		$buttons[] = ['type' => 'postback', 'title' => 'shit', 'payload' => 'ASK_QUESTION'];
@@ -43,8 +44,7 @@ if(!empty($messageText))
 			'recipient' => [ 'id' => $senderId ],
 			'message' => [ 'attachment' => $menu_message ]
 		];
-	}	
-}
+	}
 $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
